@@ -8,3 +8,14 @@ wheels/
 
 # Virtual environments
 .venv
+
+*.log
+*.bak
+*.swp
+*.tmp
+*.DS_Store
+
+# for ROS,ROS2
+build/*
+install/*
+log/*

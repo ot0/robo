@@ -1,0 +1,127 @@
+<robot name="mr999">
+    <link name="map"/>
+    <joint name="map_base" type="fixed">
+        <parent link="map"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0.0"/>
+    </joint>
+
+  	<link name="base_link"/>
+
+    <joint name="base_body" type="fixed">
+        <parent link="base_link"/>
+        <child link="body"/>
+        <origin xyz="0 0 0.0"/>
+    </joint>
+
+ 	<link name="body">
+		<visual>
+		    <origin xyz="0 0 0.023" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.085 0.19 0.046"/>
+			</geometry>
+  		</visual>
+		<visual>
+		    <origin xyz="0 0 0.023" rpy="0 0 0"/>
+			<geometry>
+              	<box size="0.19 0.085 0.046"/>
+			</geometry>
+		</visual>
+		<visual>
+			<origin xyz="0 0 0.03" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.06" length="0.06"/>
+			</geometry>
+	     	<material name="body">
+				<color rgba="0.8 0.8 0.8 1.0"/>
+			</material>
+	   </visual>  
+	</link>
+	
+    <joint name="body_shoulder" type="revolute">
+    	<parent link="body"/>
+    	<child link="shoulder"/>
+    	<origin xyz="0.00 0 0.06" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.6" upper="1.6" effort="0" velocity="0"/>
+	</joint>
+
+ 	<link name="shoulder">
+		<visual>
+		    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+			<geometry>
+              	<box size="0.10 0.055 0.1"/>
+			</geometry>
+			<material name="Black1">
+	       		<color rgba="0.2 0.2 0.2 1.0"/>
+	     	</material>
+		</visual>	
+	</link>
+
+    <joint name="shoulder_elbow" type="revolute">
+    	<parent link="shoulder"/>
+    	<child link="elbow"/>
+    	<origin xyz="0.00 0 0.095" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+        <limit lower="-1.6" upper="1.6" effort="0" velocity="0"/>
+	</joint>
+
+    <link name="elbow">
+		<visual>
+		    <origin xyz="0 0 0.07" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.03" length="0.14"/>
+			</geometry>
+			<material name="Black2">
+	       		<color rgba="0.2 0.2 0.2 1.0"/>
+	     	</material>
+		</visual>	
+	</link>
+
+    <joint name="elbow_wrist" type="revolute">
+    	<parent link="elbow"/>
+    	<child link="wrist"/>
+    	<origin xyz="0 0 0.12" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+        <limit lower="-1.6" upper="1.6" effort="0" velocity="0"/>
+	</joint>
+
+ 	<link name="wrist">
+		<visual>
+		    <origin xyz="0 0 0.055" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.03" length="0.11"/>
+			</geometry>
+			<material name="Black3">
+	       		<color rgba="0.2 0.2 0.2 1.0"/>
+	     	</material>
+		</visual>	
+	</link> 
+
+	<joint name="wrist_hand" type="revolute">
+    	<parent link="wrist"/>
+    	<child link="hand"/>
+    	<origin xyz="0 0 0.11" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.6" upper="1.6" effort="0" velocity="0"/>
+	</joint>
+
+ 	<link name="hand">
+		<visual>
+		    <origin xyz="0 0 0.02" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.03" length="0.04"/>
+			</geometry>
+		</visual>	
+		<visual>
+		    <origin xyz="0 0 0.07" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.07 0.03 0.07"/>
+			</geometry>
+			<material name="Black3">
+	       		<color rgba="0.2 0.2 0.2 1.0"/>
+	     	</material>
+		</visual>	
+	</link> 
+
+</robot>

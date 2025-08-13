@@ -14,9 +14,9 @@ def main()->None:
     background_color=(0,0,0)
     font_color = (255,255,255)
     pygame.init()
+    h = hid.device()
+    h.open(0x12ed, 0x1003)
     try:
-        h = hid.device()
-        h.open(0x12ed, 0x1003)
 
         key_setting = {
             pygame.K_q:0,
