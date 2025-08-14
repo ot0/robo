@@ -55,3 +55,18 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="12ed", ATTR{idProduct}=="1003", MODE="0664", 
 ```sh
 sudo -E ~/.local/bin/uv run main.py
 ```
+
+#### go-taskのインストール
+
+操作を簡易化するために、taskをインストール
+
+```sh
+sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
+```
+
+### ROS2
+
+ROS2をインストール
+
+バージョンhumbleを利用を想定
+python3.13で動作せず、python3.10出ないと動かないところが発生。

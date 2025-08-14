@@ -1,0 +1,22 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+  build:
+    cmds:
+      - rosdep install -i --from-path src --rosdistro humble -y
+      - colcon build --symlink-install
+
+  run:
+    cmds:
+      # - source setup.bash
+      - ros2 run urdf_mr999 {{.CLI_ARGS}}

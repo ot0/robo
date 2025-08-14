@@ -1,3 +1,5 @@
+"""Setup script for the urdf_mr999 package."""
+
 from setuptools import find_packages, setup
 
 package_name = "urdf_mr999"
@@ -11,7 +13,9 @@ setup(
             ["resource/" + package_name]),
         ("share/" + package_name, ["package.xml"]),
     ],
-    install_requires=["setuptools"],
+    install_requires=[
+        "setuptools",
+        ],
     zip_safe=True,
     maintainer="ot0",
     maintainer_email="ot0a6u@gmail.com",
@@ -22,6 +26,7 @@ setup(
         "console_scripts": [
             "control = urdf_mr999.control_publisher:main",
             "subscriber = urdf_mr999.control_subscriber:main",
+            "hid = urdf_mr999.hid_interface:main",
         ],
     },
 )

@@ -1,7 +1,8 @@
+"""動作確認用."""
 import rclpy
 from rclpy.node import Node
 
-from urdf_mr999.msg import Control
+from msg_mr999.msg import Control
 
 
 class ControlSubscriber(Node):
@@ -10,14 +11,14 @@ class ControlSubscriber(Node):
         super().__init__("control_subscriber")
         self.subscription = self.create_subscription(
             Control,
-            "topic",
+            "control",
             self.listener_callback,
             10)
-        self.subscription  # prevent unused variable warning
+        self.get_logger().info(f"run: {self.subscription}")
 
     def listener_callback(self, msg):
-        self.get_logger().info("body: %f, shoulder: %f, elbow: %f, wrist: %f, hand: %f",
-                               msg.body, msg.shoulder, msg.elbow, msg.wrist, msg.hand)
+        self.get_logger().info(f"body: {msg.body}, shoulder: {msg.shoulder},"
+                f"elbow: {msg.elbow}, wrist: {msg.wrist}, hand: {msg.hand}")
 
 
 def main(args=None):
