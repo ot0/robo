@@ -11,10 +11,8 @@ logger = logging.getLogger(__name__)
 class Camera:
     """カメラのクラス."""
 
-    def __init__(self, camera_id:int=0)->None:
+    def __init__(self, camera_id:int=0, width:int=1600, height:int=1200)->None:
         """コンストラクタ."""
-        width = 1920
-        height = 1080
         self.camera_id = camera_id
         self.cap = cv2.VideoCapture(camera_id)
         if not self.cap.isOpened():
