@@ -26,6 +26,15 @@ class Control:
         self.elbow = elbow
         self.wrist = wrist
         self.hand = hand
+
+    def clear(self)->None:
+        """コントロールをクリア."""
+        self.body = 0
+        self.shoulder = 0
+        self.elbow = 0
+        self.wrist = 0
+        self.hand = 0
+
     def __repr__(self)->str:
         """文字列化."""
         return (f"Control(body={self.body}, shoulder={self.shoulder}, "

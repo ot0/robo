@@ -4,7 +4,8 @@ import time
 
 import pygame
 
-from location_detect_by_camera import Camera
+from camera import Camera
+from location import Location
 from mr999 import Control, Mr999
 from screen import Screen
 from state import State
@@ -28,6 +29,8 @@ def main()->None:
         running = True
         control = Control()
         state.control = control
+        location = Location()
+        state.location = location
 
         while running:
             start = time.perf_counter()
@@ -35,6 +38,8 @@ def main()->None:
             #　操作
             locates, frame = camera.get_locate()
             screen.update(state, frame, locates)
+
+            location.get_control(locates, state)
 
             for event in pygame.event.get():
                 if (event.type == pygame.QUIT or
@@ -49,10 +54,11 @@ def main()->None:
                 elif ((event.type == pygame.MOUSEBUTTONDOWN
                        and event.button == pygame.BUTTON_LEFT)
                     or (event.type == pygame.MOUSEMOTION and event.buttons[0])):
-                    target = event.pos
+                    state.target = event.pos
                 elif (event.type == pygame.MOUSEBUTTONDOWN
                       and event.button == pygame.BUTTON_RIGHT):
-                    target = None
+                    state.target = None
+                    control.clear()
 
             robo.move_control(control)
 

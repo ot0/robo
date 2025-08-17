@@ -32,5 +32,6 @@ class State:
         self.control = None
         self.camera = None
         self.screen = None
+        self.location = None
         self.speeds = [0.0]
 

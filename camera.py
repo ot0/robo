@@ -29,19 +29,18 @@ class Camera:
 
         horizontal_fov = math.radians(64.0)  # 水平視野角
         focal_length = width / (2 * math.tan(horizontal_fov / 2))  # 焦点距離
-        marker_size = 0.02
+        self.marker_size = 0.02
 
         self.object_points = np.array([
-            [-marker_size / 2, -marker_size / 2, 0],
-            [marker_size / 2, -marker_size / 2, 0],
-            [marker_size / 2, marker_size / 2, 0],
-            [-marker_size / 2, marker_size / 2, 0],
+            [-self.marker_size / 2, -self.marker_size / 2, 0],
+            [self.marker_size / 2, -self.marker_size / 2, 0],
+            [self.marker_size / 2, self.marker_size / 2, 0],
+            [-self.marker_size / 2, self.marker_size / 2, 0],
         ], dtype=np.float32)
         self.camera_matrix = np.array([[focal_length, 0, width / 2],
                                 [0, focal_length, height / 2],
                                 [0, 0, 1]], dtype=np.float32)
         self.dist_coeffs = np.array([0, 0, 0, 0], dtype=np.float32)  # 歪み係数
-        self.marker_size = marker_size
 
     def __del__(self)->None:
         """デストラクタ."""
@@ -71,6 +70,8 @@ class Camera:
                                               self.camera_matrix, self.dist_coeffs)
             if success:
                 i = int(index[0])
+                # if rvec[2] > 0:
+                #     rvec *= np.array([[1], [-1], [-1]])
                 result[i] = {
                     "rvec": rvec,
                     "tvec": tvec,

@@ -69,10 +69,7 @@ class Screen:
             surface = change_image(frame)
         self.screen.blit(surface, (0, 0))
 
-        ### マウスカーソルの設定
-        if state.target is not None:
-            pygame.draw.circle(self.screen, self.caution_color,
-                               state.target, target_size, 1)
+        self.write_speed_graph(self.speeds)
 
         ### 情報表示
         self.write_str(f"{self.speeds[-1]*1000:.1f}ms, {state.control}",(1,1))
@@ -82,7 +79,17 @@ class Screen:
             r = str(locate["rvec"].flatten())
             self.write_str(f"{i}: t={t}, r={r}", (1, i * 30))
 
-        self.write_speed_graph(self.speeds)
+        ### 姿勢描画
+        self.write_str(f"rel: {state.location.rel}", (1, 30))
+        if len(state.location.rel) >2:
+            center = state.location.rel[0]
+            to = state.location.rel[1]
+            pygame.draw.line(self.screen, self.caution_color, center, to)
+
+        ### マウスカーソルの設定
+        if state.target is not None:
+            pygame.draw.circle(self.screen, self.caution_color,
+                               state.target, target_size, 1)
 
         pygame.display.flip()
 
